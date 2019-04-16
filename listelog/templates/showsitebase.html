@@ -1,0 +1,11 @@
+<html>
+    <body>
+            <ul>
+                {%for section in sections%}
+                <a href="/site/{{section.bde.nom}}/{{section.titre}}">{{section.titre}}</a>
+                {%endfor%}
+            </ul>
+    {%block content%}
+    {%endblock content%}
+    </body>
+</html>

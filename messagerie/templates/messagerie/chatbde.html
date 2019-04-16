@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>chat</h2>
+    {%if messages != None%}
+    {%for message in messages%}
+    <p>
+    {%if message.anonymat == False%}
+    {{message.etudiantc.username}}
+    {%else%}
+     message anonyme
+    {%endif%}
+    :{{message.contenu}}</p>
+    {%endfor%}
+    {%endif%}
+    <form method="post">
+        {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit">
+    </form>
+{% endblock %}

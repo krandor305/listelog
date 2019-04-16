@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h2><img src="{{object.image.url}}"></h2>
+    <h2>nom:{{object.nom}}</h2>
+</div>
+    <h2>etablissement:{{object.etablissement}}</h2>
+    <h2>adresse:{{object.adresse}}</h2>
+    {%if user.is_authenticated and user.bdechoisi == None%}
+        <a href="/demande/{{object.nom}}" class="btn btn-primary btn-md">
+        rejoindre
+        </a>
+    </button>
+    {%endif%}
+{% endblock %}

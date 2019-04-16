@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>evenement:</h1>
+{%if allowed == True%}
+<form method='post'>
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit">
+</form>
+{% else %}
+<p>titre:{{evenement.titre}}</p>
+<p>Description:{{evenement.Description}}</p>
+<p>places:{{evenement.places}}</p>
+<p>date:{{evenement.date}}</p>
+<p>lieu:{{evenement.lieu}}</p>
+<p>organisateur:{{evenement.organisateur}}</p>
+<p>type_evenement:{{evenement.type_evenement}}</p>
+<p>invites:</p>
+<ul>
+{%for invite in evenement.invites.all%}
+<li>nom:{{invite.first_name}} {{invite.last_name}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+<a href="/bde/ajoutevent?q={{evenement.titre}}" class="btn btn-primary btn-md">
+    Ajouter un evenement Similaire
+    </a>
+{% endblock %}

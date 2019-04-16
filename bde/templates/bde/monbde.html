@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Mon Association</h1>
+</div>
+    <h2><img src="{{object.image.url}}"></h2>
+    <h2><span class="text-primary">Nom:</span>{{object.nom}}</h2>
+    <h2><span class="text-primary">Etablissement:</span>{{object.etablissement}}</h2>
+    <h2><span class="text-primary">Adresse:</span>{{object.adresse}}</h2>
+    <div id="membres" class="container-fluid">
+        <h2 class="text-primary">membres:</h2>
+        <table class="table table-striped">
+        {%for membre in membres%}
+                <thead>
+                  <tr>
+                    <th>Noms d'utilisateurs</th>
+                    <th>Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+            <td>{{membre.username}}</td>
+            <td><a href="/bde/membre/{{membre.username}}" class="btn btn-primary btn-md">
+                Consulter
+                </a>
+                {%if user.poste == 'President' and user != membre%}
+                <a href="/bde/passation/{{membre.username}}" class="btn btn-primary btn-md">
+                    passation poste president
+                    </a>
+            </td>
+                {%endif%}
+                </tbody>
+            </tr>
+        {%endfor%}
+        </table>
+    </div>
+    {%if evenements %}
+    <div id="evenements" class="container-fluid">
+        <h2 class="text-primary">evenements:</h2>
+        <table class="table table-striped">
+                <thead>
+                        <tr>
+                          <th>Titres d'evenement</th>
+                          <th>Options</th>
+                        </tr>
+                </thead>
+            {%for evenement in evenements%}
+            <tbody>
+                <tr>
+                <td>{{evenement.titre}}</td>
+               <td><a href="/bde/event/{{user.bdechoisi.nom}}/{{evenement.titre}}" class="btn btn-primary btn-md">
+                        Consulter
+                        </a>
+               </td>
+                </tr>
+            </tbody>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%}
+    <div id="news" class="container-fluid">
+      <h2 class="text-primary">news:</h2>
+      <table class="table table-striped">
+      <thead>
+            <tr>
+              <th>News</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+      {%for nouv in news%}
+      <tbody>
+      <tr>
+        <td>{{nouv.titre}}</td>
+        <td><a href="/bde/modif_news/{{object.nom}}/{{nouv.titre}}" class="btn btn-primary btn-md">
+            modifier
+            </a>
+            <a href="/bde/suppr_news/{{object.nom}}/{{nouv.titre}}" class="btn btn-primary btn-md">
+                Supprimer
+                </a>
+        </td>
+        </tr>
+        </tbody>
+      {%endfor%}
+    </table>
+    </div>
+      {%if demandeurs != None%}
+    <div id="demandeurs" class="container-fluid">
+      <h2 class="text-primary">demandeurs:</h2>
+      <table class="table table-striped">
+      <thead>
+            <tr>
+              <th>Nom du demandeurs</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+      {%for demandeur in demandeurs%}
+      <tbody>
+      <tr>
+        <td>{{demandeur.username}}</td>
+        <td><a href="/accepter/{{demandeur.username}}" class="btn btn-primary btn-md">
+            accepter
+            </a>
+        </td>
+        </tr>
+        </tbody>
+      {%endfor%}
+    </table>
+    </div>
+    {%else%}
+    <p>pas de demandeurs pour l'instant</p>
+    {%endif%}
+      <div id=options>
+            <h2 class="text-primary">Options:</h2>
+            <div class="btn-group">
+          {% if allowedevent == True %}
+    <a href="/bde/ajoutevent" class="btn btn-primary btn-md">
+                Ajout evenement
+         </a>
+         {%endif%}
+         {% if allowedmission == True or user.poste == 'President'%}
+         <a href="/bde/donner_mission" class="btn btn-primary btn-md">
+            donner mission
+     </a>
+        {%endif%}
+    <a href="/rooms/bde" class="btn btn-primary btn-md">
+        chat
+        </a>
+    <a href="/bde/tresorerie" class="btn btn-primary btn-md">
+        tresorerie
+        </a>
+        <a href="/bde/ajout_news" class="btn btn-primary btn-md">
+            tresorerie
+            </a>
+        <a href="/quit" class="btn btn-primary btn-md">
+        quitter
+        </a>
+    </div>
+    </div>
+{% endblock %}

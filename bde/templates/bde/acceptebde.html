@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+{%for name in noms%}
+<tr>
+<td>
+{{name.nom}}
+</td>
+<td>
+{{name.user.First_name}}
+</td>
+<td>
+<a href="/adminacceptbde/{{name.nom}}/" class="btn btn-primary btn-md">
+    accepter
+    </a>
+</td>
+</tr>
+{%endfor%}
+</table>
+{% endblock %}

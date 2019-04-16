@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>tresorerie:</h2>
+    {%if tresorerie != None%}
+    {%for operation in tresorerie%}
+    <p>{{operation.titre}}:{{operation.Montant}} à la date du {{operation.dateop}}</p>
+    <a href="/bde/deltreso/{{operation.id}}">Supprimer</a>
+    {%endfor%}
+    {%endif%}
+    {%if allowed == True%}
+    <form method="post">
+        {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit">
+    </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,67 @@
+{%extends "base.html"%}
+{%load static%}
+{%block head%}
+        <link rel="stylesheet" type="text/css" href="{% static "css/stylefeuille.css"%}">
+        <script src="{% static "js/javascript.js" %}"></script>
+{%endblock head%}
+{%block content%}
+{%if notification != None%}
+<div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{notification}}</strong>
+</div>
+{%endif%}
+<header>
+   <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+   <link href='http://fonts.googleapis.com/css?family=Sansita' rel='stylesheet'>
+</header>
+<div id="diap0">
+  <img src="{% static "images/close.png" %}" id="quitimg" style="-webkit-animation: mymove 2s infinite;
+    animation: mymove 2s infinite;" onclick="quit0()">
+    <div id="diapht">
+    <h1 style="color: darkblue;font: 72px 'Sansita';text-shadow: 3px 3px 0px #393D48, 6px 6px 0px #5c5f72;">
+bienvenue sur le Site</h1></div>
+</div>
+<div id="diap">
+<div><img src="close.png" id="quitimg" onclick="quit()"></div>
+<img src="{% static "images/swipl.png" %}" width="75px" height="75px" id="aleft" onclick="befimg()">
+<div id="diapimag"></div>
+<img src="{% static "images/swipr.png" %}" width="75px" height="75px" id="aright" onclick="nextimg()">
+</div>
+<div id="left">
+<table border="1" frame="void" id="tabl1">
+<tr>
+{%for article in news%}
+<td style="width:200px">
+<section>
+<article>
+<img src="{{article.image.url}}" id="pres" width="400px" height="200px"/>
+<h1 style="word-break:normal;color:#000033;">{{article.Titre}}</h1>
+<p style="word-break: normal;">{{article.Description}}</p>
+<script>
+var h0="{{article.T1}}";
+var p0="{{article.D2}}";
+var num="{{ forloop.counter0 }}";
+</script>
+<a name="link" onclick="writep(h0,p0,num)">plus...</a>
+</article>
+</section>
+</td>
+{%endfor%}
+</tr>
+</table>
+</div>
+<div id="right" style="background-color:lightblue">
+<div id="box"  onclick="exco()"><div>&#10134;</div></div>
+<div id="box1"  onclick="closep()"><div style="padding:0.65px">&#10060;</div></div>
+<h1 id="demoh1"></h1>
+<p id="demo"></p>
+<div id="addon"></div>
+</div>
+<div id="plus" onclick="exco()"><img src="{% static "images/plus.png" %}"style="text-align:center;width:35px;height:35px"/></div>
+<footer>
+<p>&copy; copyright Listelog</p>
+</footer>
+</html>
+{%endblock content%}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>utilisateur:</h1>
+<img src="{{membre.image.url}}" width="100px" height="100px">
+<h2>nom:{{membre.username }}</h2>
+{%if allowed == True%}
+<form method='post'>
+    {%csrf_token%}
+    {{form1.as_p}}
+{% endif %}
+{%if missions != None%}
+{%if allowedmission == False%}
+<table>
+    <tr>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Date</th>
+    </tr>
+{%for mission in missions%}
+<tr>
+        <td>{{mission.Titre}}</td>
+        <td>{{mission.Description}}</td>
+        <td>{{mission.date}}</td>
+</tr>
+{%endfor%}
+</table>
+{%else%}
+{{missions.as_p}}
+{%endif%}
+{%endif%}
+<input type="submit">
+</form>
+{% endblock %}
